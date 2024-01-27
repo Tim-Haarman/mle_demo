@@ -11,13 +11,14 @@ from config import PreprocessingConfig, IOConfig
 class Preprocessor:
     def __init__(self, data: pd.DataFrame, inference_mode: bool):
         self.data = data
+        self.labels = self.data.pop(PreprocessingConfig.target_column)
         self.inference_mode = inference_mode
 
     def __call__(self):
         self.select_features()
         encoder = self.get_encoder()
         self.encode_data(encoder=encoder)
-        return self.data
+        return self.data, self.labels
 
     def select_features(self):
         self.data = self.data[PreprocessingConfig.feature_columns]

@@ -2,7 +2,7 @@ import pickle
 
 from sklearn.metrics import classification_report
 from sklearn.model_selection import train_test_split
-from sklearn.tree import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 from config import IOConfig, ModelConfig
 
@@ -50,4 +50,12 @@ class Model:
 
 
 if __name__ == "__main__":
-    model = Model()
+    from preprocessing import Preprocessor
+    import pandas as pd
+
+    df = pd.read_csv(IOConfig.data_path)
+    processor = Preprocessor(data=df, inference_mode=False)
+    processed_data, labels = processor()
+
+    model = Model(inference_mode=False)
+    model.train_model(processed_data, labels=labels)

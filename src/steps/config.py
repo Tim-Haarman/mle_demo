@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 class IOConfig:
-    _root_folder = Path(__file__).parents[1]
+    _root_folder = Path(__file__).parents[2]
     data_path = f'{_root_folder}/data/bank_data_train.csv'
     encoder_path = f'{_root_folder}/artifacts/encoders/encoder.pkl'
     model_folder_path = f'{_root_folder}/artifacts/models/'
